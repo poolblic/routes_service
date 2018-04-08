@@ -4,7 +4,6 @@ from longlat.views import LongLatView
 import googlemaps
 import os
 
-
 # Create your views here.
 class DestinationView(APIView):
     gmaps = googlemaps.Client(key=os.environ.get('GOOGLE_DIRECTIONS_API_KEY'))
@@ -38,7 +37,6 @@ class DestinationView(APIView):
         return directions
 
     def get_route(self, origin, originClose, dest, destClose):
-
         routes = {}
 
         routes['originDest'] = self.gmaps.directions(origin,
