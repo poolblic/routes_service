@@ -1,6 +1,7 @@
 from routes_service import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from uber.serializer import UberModelSerializer
 import requests
 
 
@@ -16,4 +17,20 @@ class UberView(APIView):
             'redirect_uri': 'http://localhost:8000/uber/access_code'
 
         })
-        return Response(result, status=200)
+        response = result.json()
+
+        access_token = response.get('access_token')
+        result = requests.get('https://sandbox-api.uber.com/v1.2/me', headers={'authorization': 'Bearer ' + access_token})
+        response = result.json()
+        name = response.get('first_name') + response.get('last_name')
+        email = response.get('email')
+
+        serializer = UberModelSerializer(data={
+            'name': name,
+            'email': email,
+            'access_token': access_token
+        })
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
