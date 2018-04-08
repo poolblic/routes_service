@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from routes.view import RoutesView
+from routes.views import RoutesView
 
 urlpatterns = [
     path('', RoutesView.as_view(), name='routes')
