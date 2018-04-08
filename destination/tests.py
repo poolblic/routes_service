@@ -9,4 +9,3 @@ class DestinationTest(TestCase):
         dest.get_route((-22.893528, -47.040663),(-22.893742, -47.040653),(-22.894152, -47.051060),(-22.909315, -47.086260))
         print("test_get_route Done")
         return True
-
