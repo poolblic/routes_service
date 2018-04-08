@@ -11,9 +11,10 @@ class LongLatView(APIView):
     mykey = None
     gmaps = None
     def get(self, request):
+        super.__init__()
         return Response("Ok")
 
-    def longlat_points(self, origin = 'rua americo jacomino canhoto, 506', destination = 'rua antonio blanco, 169'):
+    def longlat_points(self, origin, destination):
         geocode_result = self.gmaps.geocode(origin)
         origin_longlat = geocode_result[0]['geometry']['location']
         origin_lat = geocode_result[0]['geometry']['location']['lat']
@@ -42,19 +43,16 @@ class LongLatView(APIView):
             origin_closer_lat = origin_lat+0.3
             if destination_long >= destination_closer_long:
                 origin_closer_long = origin_long
-        dict =  {'origin':{'lat':origin_lat, 'long':origin_long},
-         'origin_closer':{'lat':origin_closer_lat,'long':origin_closer_long},
-         'dest':{'lat':destination_lat,'long':destination_long},
-         'dest_closer':{'lat':destination_closer_lat,'long':destination_closer_long}}
+        dict =  {'origin':(origin_lat,origin_long),
+         'origin_closer':(origin_closer_lat,origin_closer_long),
+         'dest':(destination_lat,destination_long),
+         'dest_closer':(destination_closer_lat,destination_closer_long)}
         return dict
 
     def __init__(self):
         self.mykey = os.environ['GEOCODINGKEY']
         self.gmaps = googlemaps.Client(key=self.mykey)
 
-    def main():
-        a = LongLatView()
-        a.longlat_points()
 """
 {
     data: {
