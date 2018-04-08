@@ -24,13 +24,13 @@ class LongLatView(APIView):
 
         if destination_lat > origin_lat:
             destination_closer_lat = destination_lat-0.03
-            origin_closer_lat = origin_lat+0.3
+            origin_closer_lat = origin_lat+0.03
             if origin_lat > destination_closer_lat or origin_closer_lat > destination_closer_lat:
                 origin_closer_lat = origin_lat
                 destination_closer_lat = destination_lat
         else:
             destination_closer_lat = destination_lat+0.03
-            origin_closer_lat = origin_lat-0.3
+            origin_closer_lat = origin_lat-0.03
             if origin_lat <= destination_closer_lat or origin_closer_lat <= destination_closer_lat:
                 origin_closer_lat = origin_lat
                 destination_closer_long = destination_long
@@ -42,7 +42,7 @@ class LongLatView(APIView):
                 destination_closer_long = destination_long
         else:
             destination_closer_long = destination_long-0.03
-            origin_closer_long = origin_long+0.3
+            origin_closer_long = origin_long+0.03
             if origin_long <= destination_closer_long or origin_closer_long <= destination_closer_long:
                 origin_closer_long = origin_long
                 destination_closer_long = destination_long
