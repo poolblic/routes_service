@@ -11,7 +11,6 @@ class LongLatView(APIView):
     mykey = None
     gmaps = None
     def get(self, request):
-        super.__init__()
         return Response("Ok")
 
     def longlat_points(self, origin, destination):
@@ -38,7 +37,7 @@ class LongLatView(APIView):
         if destination_long > origin_long:
             destination_closer_long = destination_long-0.03
             origin_closer_long = origin_long+0.03
-            if origin_long < destination_closer_long or origin_closer_long > destination_closer_long:
+            if origin_long > destination_closer_long or origin_closer_long > destination_closer_long:
                 origin_closer_long = origin_long
                 destination_closer_long = destination_long
         else:
