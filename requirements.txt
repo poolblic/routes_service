@@ -6,7 +6,7 @@ googlemaps==2.5.1
 idna==2.6
 psycopg2==2.7.4
 pytz==2018.3
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.4
 uber-rides==0.6.0
 urllib3==1.22
